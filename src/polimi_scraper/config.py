@@ -22,6 +22,7 @@ class DataPath:
     SCHEDULE = PROCESSED_DIR / "schedule.parquet"
 
 
+POLIMAPS_URL = "https://maps.polimi.it/maps/"
 OCCUPANCY_URL = (
     "https://www7.ceda.polimi.it/spazi/spazi/controller/OccupazioniGiornoEsatto.do"
 )
