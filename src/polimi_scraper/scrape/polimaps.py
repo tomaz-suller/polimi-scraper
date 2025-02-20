@@ -46,7 +46,7 @@ def get_polygons(driver: Firefox, depth: int = 0):
         # HACK Loading the SVG takes about 3 s, so we can only
         # find polygons this fast if no new data was loaded
         # which represents an error
-        if time_to_find < 0.1 or (number_polygons := len(polygons)) == 0:
+        if time_to_find < 0.5 or (number_polygons := len(polygons)) == 0:
             logger.warning("No polygons found")
             polygons = []
         else:
