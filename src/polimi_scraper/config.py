@@ -7,6 +7,7 @@ logger.remove()
 logger.add(lambda msg: tqdm.write(msg, end=""), colorize=True)
 
 REPO_ROOT = Path(__file__).absolute().parent.parent.parent
+LOG_DIR = REPO_ROOT / "logs"
 
 
 class DataPath:
