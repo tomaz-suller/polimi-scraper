@@ -4,6 +4,7 @@ import pandas as pd
 from selenium.webdriver import Firefox
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.common.exceptions import UnexpectedAlertPresentException
 
 from polimi_scraper.config import LOG_DIR, POLIMAPS_URL, DataPath, logger
 
@@ -31,7 +32,11 @@ def get_polygons(driver: Firefox, depth: int = 0):
         driver.switch_to.parent_frame()  # SVG is in the parent frame
         # driver is in the parent frame
         before = time()
-        polygons = parse_polygons(driver.find_elements(By.TAG_NAME, "polygon"))
+        try:
+            polygons = parse_polygons(driver.find_elements(By.TAG_NAME, "polygon"))
+        except UnexpectedAlertPresentException as e:
+            logger.error("Error while loading SVG, returning no polygons: '{}'", e)
+            return []
         after = time()
         time_to_find = after - before
 
